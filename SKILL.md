@@ -1,6 +1,6 @@
 ---
 name: epic-storytelling
-description: Master viral storytelling and scriptwriting engine modeled after the high-retention, psychology-based storytelling style of PsychToonsHQ. Delivers the complete end-to-end pipeline: narrative scriptwriting, the 4-word comma-splitting doctrine, visual prompt CSV generation, and autonomous Kaggle T4 GPU audio generation (F5-TTS) with pitch-preserved speedup.
+description: Master viral storytelling and scriptwriting engine modeled after the high-retention, psychology-based storytelling style of PsychToonsHQ. Delivers the complete end-to-end pipeline: narrative scriptwriting, the 4-word comma-splitting doctrine (pure line-by-line output without descriptions), 1-to-1 split visual prompt CSV generation, and autonomous Kaggle T4 GPU audio generation (F5-TTS) with pitch-preserved speedup.
 ---
 
 # Epic Storytelling: The Complete PsychToonsHQ Pipeline
@@ -9,8 +9,8 @@ description: Master viral storytelling and scriptwriting engine modeled after th
 
 Unlike informational channels that recite dry bullet points, or teleprompter tools that mechanically chop sentences at `and`, `or`, and `but`, this skill orchestrates the complete workflow:
 1. **Psychological Narrative Scripting**: Relatable micro-simulations, continuous curiosity loops, plainspoken 5th-grade clarity, and observational humor.
-2. **The 4-Word Comma-Splitting Engine**: Smart pacing that cuts at natural commas only when surrounding clauses have at least 4 words, preserving the master script line count while generating granular visual beats.
-3. **Visual Prompt CSV Engine**: Formatted strictly as `SN, SCRIPT, PROMPT` with PsychToons 2D minimalist hand-drawn animation prompts.
+2. **The 4-Word Comma-Splitting Engine (Pure Line-by-Line Output)**: Smart pacing that cuts at natural commas only when surrounding clauses have at least 4 words. The split script is saved as a **clean line-by-line script without headers, descriptions, or line tags**.
+3. **1-to-1 Split Script Visual Prompt CSV Engine**: Formatted strictly as `SN, SCRIPT, PROMPT`, generated **directly from the Split Script lines** so every visual scene cuts with each comma-split spoken beat.
 4. **Autonomous Kaggle T4 Audio Engine**: Zero-shot F5-TTS voice synthesis, exact modern Kaggle metadata settings (`machine_shape: "NvidiaTeslaT4"`), 10-line batching to prevent cross-attention drift, volume normalization, and pitch-preserved tempo acceleration (1.25x).
 
 ---
@@ -86,12 +86,12 @@ Ground abstract ideas in visceral, universal experiences:
 
 ---
 
-## 4. The 4-Word Comma-Splitting Engine (Pacing & Display Doctrine)
+## 4. The 4-Word Comma-Splitting Engine (Pure Line-by-Line Doctrine)
 
-When preparing a script for visual production, subtitle burning, or video scene division, apply the **4-Word Comma-Splitting Rule**.
+When preparing a script for visual production, video editing, subtitle generation, or image prompt mapping, apply the **4-Word Comma-Splitting Rule**.
 
 ### The Rule
-Split a sentence at a comma into a new line **ONLY if both the preceding text has at least 4 words AND the succeeding text has at least 4 words**.
+Split a sentence at a comma into a new line **ONLY if both the preceding text has at least 4 words AND the succeeding text has at least 4 words**:
 
 ```
 IF (words_before_comma >= 4) AND (words_after_comma >= 4):
@@ -100,10 +100,23 @@ ELSE:
     KEEP intact on the same line
 ```
 
+### Output Format Doctrine: Clean Line-by-Line Script
+The output of the split must be saved as a **pure line-by-line script without descriptions, headers, or line numbers**:
+- ❌ **Do NOT include descriptions or markdown headings** like `### Script Line 1` or `# Act 1`.
+- ❌ **Do NOT include bracketed tags** like `- [Line 1.1]` or bullet points.
+- ✅ **DO write exactly one spoken/visual fragment per line**:
+  ```
+  There is a very rare kind of intelligence that no classroom ever tested you for,
+  and school never had a grade for it.
+  Psychologists have spent decades trying to give it a clinical name,
+  but most people who carry it simply call it survival.
+  Today, we are calling it what it genuinely is: Survivor's Intelligence.
+  ```
+
 ### Why This Rule Exists
 1. **Prevents Orphaned Micro-Fragments**: Words like `"Yes,"`, `"However,"`, `"In fact,"`, or `", you know,"` are never chopped onto their own isolated lines.
-2. **Creates Natural Visual Beats**: Compound clauses that represent distinct mental thoughts are split cleanly, allowing the visual scene or caption to cut rhythmically with the narrator's natural breath pause.
-3. **Preserves Master Script Count**: The original script line numbers remain the master anchor (e.g. Line 1 to Line 400). When split, child lines are indexed as `[Line 1.1]`, `[Line 1.2]` (or sequential visual beats), expanding a 400-line script into ~580–600 balanced visual beats.
+2. **Creates Natural Visual Beats**: Compound clauses representing distinct visual thoughts are split cleanly, allowing the video scene or caption to cut rhythmically with the narrator's breath pause.
+3. **Foundation for 1-to-1 Visual Prompts**: This clean line-by-line split file becomes the exact direct input for the Image Prompt CSV engine.
 
 ### Reference Python Implementation
 ```python
@@ -147,14 +160,19 @@ def split_sentence_at_commas(sentence, min_words=4):
 
 ## 5. Visual Storytelling & Image Prompt CSV Engine (`SN, SCRIPT, PROMPT`)
 
-When the user requests visual prompts or an Image CSV, generate an entry for **every single line (or split visual beat)**.
+The Image Prompt CSV is generated **directly from the clean line-by-line Split Script**, NOT from the un-split master script.
+
+### 1-to-1 Mapping Rule
+- **Every single line of the Split Script becomes exactly one row in the CSV.**
+- For example, if a 400-line master script splits into 585 lines, the Image CSV has **exactly 585 rows** (`SN 1` to `SN 585`).
+- This guarantees that every visual scene corresponds 1-to-1 with every spoken breath beat.
 
 ### CSV Schema
 Standard CSV format with exact headers:
 `SN,SCRIPT,PROMPT`
 
 - **`SN`**: Serial number counting sequentially from 1 downwards (`1, 2, 3...`).
-- **`SCRIPT`**: Exact spoken sentence or split fragment.
+- **`SCRIPT`**: Exact line text from the Split Script.
 - **`PROMPT`**: A descriptive, interesting image scene capturing the mental picture of that sentence.
 
 ### Mental Picture Translation Rules
@@ -288,10 +306,10 @@ ffmpeg -y -i final_output.wav -filter:a "atempo=1.25" -c:a pcm_s16le -ar 24000 f
 ## 7. Execution Checklist for Agents
 
 When running the **epic-storytelling** pipeline:
-- [ ] **Script Writing**: Does the script feature conversational rise and fall without robotic conjunction splitting?
+- [ ] **Script Writing**: Does the master script feature conversational rise and fall without robotic conjunction splitting?
 - [ ] **Comma Splitting**: Has the 4-word rule been strictly applied (both pre-text and post-text >= 4 words)?
-- [ ] **Line Numbering**: Does the master script maintain its primary count (e.g. 400 lines) while split lines link clearly as visual beats?
-- [ ] **Visual Prompt CSV**: Are columns strictly `SN,SCRIPT,PROMPT` with the PsychToons 2D minimalist aesthetic anchor?
+- [ ] **Clean Split Output**: Is the Split Script saved as a **pure line-by-line script without markdown headers, descriptions, or line tags**?
+- [ ] **Visual Prompt CSV**: Is the CSV generated **1-to-1 directly from the Split Script lines**, having strictly `SN,SCRIPT,PROMPT` with the PsychToons 2D minimalist aesthetic anchor?
 - [ ] **Kaggle Audio**: Is `machine_shape: "NvidiaTeslaT4"` set in `kernel-metadata.json`?
 - [ ] **Voice Selection**: Is a warm, authoritative male voice reference used with 100% matched phonetic text?
 - [ ] **Pure Script Guarantee**: Has all pre- and post-commentary (headers, bullet points, metadata) been stripped before audio synthesis?
