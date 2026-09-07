@@ -1,6 +1,6 @@
-﻿---
+---
 name: epic-storytelling
-description: Master viral storytelling and scriptwriting engine modeled after the high-retention, psychology-based storytelling style of PsychToonsHQ. Crafts emotionally resonant, plot-driven, long-form and short-form scripts using immersive narrative arcs, relatable everyday micro-simulations, continuous curiosity loops, plainspoken simplicity, and observational humor—without robotic conjunction splitting.
+description: Master viral storytelling and scriptwriting engine modeled after the high-retention, psychology-based storytelling style of PsychToonsHQ. Crafts emotionally resonant, plot-driven, long-form and short-form scripts using immersive narrative arcs, relatable everyday micro-simulations, continuous curiosity loops, plainspoken simplicity, and observational humor—without robotic conjunction splitting. Includes an integrated visual storytelling and image prompt CSV engine.
 ---
 
 # Epic Storytelling: The PsychToonsHQ Narrative Engine
@@ -9,7 +9,7 @@ description: Master viral storytelling and scriptwriting engine modeled after th
 
 Unlike informational scripts that recite dry bullet points, or robotic teleprompter formatters that artificially chop sentences at conjunctions like `and`, `or`, and `but`, this skill treats psychological concepts as **immersive narrative journeys**.
 
-Use this skill whenever you need to turn a psychological principle, behavioral anomaly, or personality trait into an addictive, emotionally cathartic script that grips the listener from the cold open to the final second.
+Use this skill whenever you need to turn a psychological principle, behavioral anomaly, or personality trait into an addictive, emotionally cathartic script that grips the listener from the cold open to the final second, or to generate synchronized, sentence-by-sentence visual prompt CSVs.
 
 ---
 
@@ -115,13 +115,36 @@ Add comedic relief to keep heavy psychological topics entertaining and engaging:
 
 ---
 
-## 4. Execution Checklist for Agents
+## 4. Visual Storytelling & Image Prompt CSV Engine (SN, SCRIPT, PROMPT)
 
-When generating an **epic-storytelling** script:
+When the user requests visual prompts or an Image CSV for a script, the engine generates an image scene for **every single line of the script**. 
+
+### CSV Schema
+The output file must be a standard CSV with the exact column headers:
+`SN,SCRIPT,PROMPT`
+
+- **`SN`**: The Serial Number counting sequentially from 1 downwards in increasing order (`1, 2, 3...`).
+- **`SCRIPT`**: The exact spoken sentence from the script.
+- **`PROMPT`**: A visually descriptive, interesting image scene that translates the sentence into a vivid, externalized mental picture that the human imagination instantly compiles, rendered in the user's preferred art style.
+
+### Mental Picture Translation Doctrine
+1. **Externalize the Mind**: If the sentence describes an internal thought, sensation, or psychological state (*"Your radar starts screaming..."*), translate it into a tangible, symbolic cartoon image (e.g., *A simple stick figure character with a glowing radar dish mounted on its head, warning soundwaves pulsing into an empty living room*).
+2. **Action & Story Beats**: If the sentence describes an action (*"You slide a tall glass of ice water across the counter..."*), depict the literal cinematic action with expressive character poses.
+3. **No Words or Text in Prompts**: Images must communicate through visual storytelling, gestures, props, and facial expressions—never through written words on signs or speech bubbles.
+4. **The Preferred Art Style Anchor (PsychToonsHQ Default)**:
+Unless the user explicitly specifies another art style, all prompts automatically append the channel's signature aesthetic anchor:
+> `style of minimalist hand-drawn 2D animation, simple stick-figure cartoon, clean white background, black line art, limited muted color palette, vector illustration, no text.`
+
+---
+
+## 5. Execution Checklist for Agents
+
+When generating an **epic-storytelling** script or image CSV:
 - [ ] Does the hook open directly in a relatable scenario without introductory filler?
 - [ ] Are sentences structured as natural, breathing thoughts without artificial splits at `and`, `or`, `but`?
 - [ ] Is every point dramatized with a mini-story, relatable metaphor, and emotional stake?
 - [ ] Is there observational humor and dry wit sprinkled throughout to balance heavy themes?
 - [ ] Does the script cite credible scientific frameworks (e.g. Bruce Ellis, James Gross) translated into simple language?
-- [ ] Does it maintain curiosity loops and retention re-hooks every 60-90 seconds?
-- [ ] Does the outro provide deep validation and an authentic, low-pressure call to action?
+- [ ] When an Image CSV is requested, does it strictly have the columns `SN,SCRIPT,PROMPT`?
+- [ ] Does the serial number count from 1 downwards in increasing order without skipping any sentence?
+- [ ] Does every prompt provide a vivid storytelling mental image matched to the user's preferred art style?
